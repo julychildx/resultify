@@ -1,0 +1,122 @@
+{
+    "id": "",
+    "name": "",
+    "avatar": "",
+    "gender": "",
+    "class": {},
+    "absent": "",
+    "present": "",
+    "opened": "",
+    "assessment": {
+        "totalScore": 0,
+        "averageScore": 0,
+        "grading": [
+            {
+                "grade": "A",
+                "minPoint": 94,
+                "maxPoint": 100
+            },
+            {
+                "grade": "A",
+                "minPoint": 94,
+                "maxPoint": 100
+            },
+            {
+                "grade": "A",
+                "minPoint": 94,
+                "maxPoint": 100
+            }
+        ],
+        "assessments": [
+            {
+                "maxScore": 15,
+                "score": 0,
+                "name": "MTA1"
+            },
+            {
+                "maxScore": 15,
+                "score": 0,
+                "name": "MTA2"
+            },
+            {
+                "maxScore": 10,
+                "score": 0,
+                "name": "CA"
+            },
+            {
+                "maxScore": 5,
+                "score": 0,
+                "name": "Oral Point"
+            },
+            {
+                "maxScore": 5,
+                "score": 0,
+                "name": "Report"
+            },
+            {
+                "maxScore": 50,
+                "score": 0,
+                "name": "Exam"
+            }
+        ]
+    },
+    "rating": {
+        "max": 5,
+        "grading": [
+            {
+                "minRate": 0,
+                "maxRate": 1,
+                "comment": "Good"
+            },
+            {
+                "minRate": 2,
+                "maxRate": 3,
+                "comment": "Very Good"
+            },
+            {
+                "minRate": 4,
+                "maxRate": 5,
+                "comment": "excellent"
+            }
+        ],
+        "ratings": [
+            {
+                "name": "Neatness",
+                "rate": 0
+            },
+            {
+                "name": "Meticulousness",
+                "rate": 0
+            },
+            {
+                "name": "Self Control & Interaction",
+                "rate": 0
+            },
+            {
+                "name": "Flexibility & Creativity",
+                "rate": 0
+            },
+            {
+                "name": "Adherent & Independent",
+                "rate": 0
+            }
+        ]
+    },
+    "subjects": [
+        "language Art",
+        "Agricultural Sience",
+        "Bible",
+        "Civic Education",
+        "Penmanship",
+        "Physical Health Education",
+        "Phonics",
+        "Quantitative Reasoning",
+        "Verbal Reasoning",
+        "Science",
+        "French",
+        "Creative Art",
+        "ICT",
+        "Mathematics",
+        "Music"
+    ]
+}
