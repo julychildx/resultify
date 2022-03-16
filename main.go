@@ -12,7 +12,7 @@ import (
 
 	// import modules
 	"resultify/database"
-	"resultify/todos"
+	"resultify/school"
 )
 
 // App config => App denotes the Fiber application.
@@ -20,32 +20,32 @@ func setupV1(app *fiber.App) {
     // Group is used for Routes with common prefix to define a new sub-router with optional middleware.
     v1 := app.Group("/v1")
     //Each route will have /v1 prefix
-    setupTodosRoutes(v1)
+    setupSchoolsRoutes(v1)
 }
 
 // Router defines all router handle interface includes app and group router
-func setupTodosRoutes(grp fiber.Router) {
-    // Group is used for Routes with common prefix => Each route will have /todos prefix
-    todosRoutes := grp.Group("/todos")
-    // Route for Get all todos -> navigate to => http://127.0.0.1:3000/v1/todos/
-    todosRoutes.Get("/", todos.GetAll)
-    // Route for Get a todo -> navigate to => http://127.0.0.1:3000/v1/todos/<todo's id>
-    todosRoutes.Get("/:id", todos.GetOne)
-    // Route for Add a todo -> navigate to => http://127.0.0.1:3000/v1/todos/
-    todosRoutes.Post("/", todos.AddTodo)
-    // Route for Delete a todo -> navigate to => http://127.0.0.1:3000/v1/todos/<todo's id>
-    todosRoutes.Delete("/:id", todos.DeleteTodo)
-    // Route for Update a todo -> navigate to => http://127.0.0.1:3000/v1/todos/<todo's id>
-    todosRoutes.Patch("/:id", todos.UpdateTodo)
+func setupSchoolsRoutes(grp fiber.Router) {
+    // Group is used for Routes with common prefix => Each route will have /school prefix
+    todosRoutes := grp.Group("/school")
+    // Route for Get all school -> navigate to => http://127.0.0.1:3000/v1/school/
+    todosRoutes.Get("/", school.GetAll)
+    // Route for Get a todo -> navigate to => http://127.0.0.1:3000/v1/school/<todo's id>
+    todosRoutes.Get("/:id", school.GetOne)
+    // Route for Add a todo -> navigate to => http://127.0.0.1:3000/v1/school/
+    todosRoutes.Post("/", school.AddSchool)
+    // Route for Delete a todo -> navigate to => http://127.0.0.1:3000/v1/school/<todo's id>
+    todosRoutes.Delete("/:id", school.DeleteSchool)
+    // Route for Update a todo -> navigate to => http://127.0.0.1:3000/v1/school/<todo's id>
+    todosRoutes.Patch("/:id", school.UpdateSchool)
 }
 
 // Database Connect function
 func initDatabase() {
     // define error here to prevent overshadowing the global DB
     var err error
-    // Create todos sqlite file & Config GORM config
+    // Create school sqlite file & Config GORM config
     // GORM performs single create, update, delete operations in transactions by default to ensure database data integrity
-    database.DBConn, err = gorm.Open(sqlite.Open("todos.db"), &gorm.Config{})
+    database.DBConn, err = gorm.Open(sqlite.Open("school.db"), &gorm.Config{})
 
     // Connect to database
     if err != nil {
@@ -56,7 +56,7 @@ func initDatabase() {
     fmt.Println("Database successfully connected")
 
     // AutoMigrate run auto migration for gorm model
-    database.DBConn.AutoMigrate(&todos.Todo{})
+    database.DBConn.AutoMigrate(&school.School{})
     // Initialize Database connection
     fmt.Println("Database Migrated")
 }

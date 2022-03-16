@@ -1,5 +1,5 @@
 // the todos module
-package todos
+package tmp
 
 import (
 	// import modules
