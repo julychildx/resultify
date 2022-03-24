@@ -1,24 +1,34 @@
 {
-    "adminList": [],
+    "id": "",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "avatar": "",
+    "gender": "",
+    "role": "",
+    "arm":"",
+    "class_id":"",
+    "subjectList": [],
     "classList": [
         {
             "id": 1,
-            "tag":"grade1a",
+            "tag": "grade1a",
             "name": "Grade 1",
             "arm": "primary",
             "section": "A",
             "lowestAverage": 0,
             "highestAverage": 0,
             "teacherList": [],
-            "studentList": []
+            "studentList": [],
+            "gradingList": []
         },
         {
             "id": 2,
             "name": "Grade 1",
             "arm": "primary",
+            "section": "B",
             "lowestAverage": 0,
             "highestAverage": 0,
-            "section": "B",
             "teachers": [],
             "students": []
         },

@@ -32,7 +32,7 @@ export default ({ handleChange }) => {
             <Form.Label>Rating</Form.Label>
             <Form.Select required isValid>
               <option hidden defaultValue>Choose a rating</option>
-              { jsonData.rating.ratings.map((rate, index) => (
+              { jsonData.rating.ratingList.map((rate, index) => (
                 <option key={ index }>{ rate.name }</option>
               )) }
             </Form.Select>

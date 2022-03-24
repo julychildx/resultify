@@ -6,7 +6,7 @@ import moment from "moment-timezone"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faCalendarAlt } from "@fortawesome/free-solid-svg-icons"
 import jsonData from '../../data/schema/primary.json'
-import classes from '../../data/schema/classes.json'
+import school from '../../data/schema/school.json'
 
 export default ({ handleChange }) => {
     const [bio, setBio] = useState({})
@@ -119,8 +119,7 @@ export default ({ handleChange }) => {
                         <Form.Label>Class</Form.Label>
                         <Form.Select required isValid>
                             <option defaultValue>Choose a class</option>
-                            { classes.map(({ arm, name, section }, index) => {
-                                console.log(arm)
+                            { school.classList.map(({ arm, name, section }, index) => {
                                 if (arm === 'primary')
                                     return <option key={ index }>{ name + section }</option>
                             }) }

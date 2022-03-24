@@ -32,7 +32,7 @@ export default ({ handleChange }) => {
           <Form.Select required isValid>
             <option hidden defaultValue>Choose an subject</option>
 
-            { jsonData.subjects.map((subject, index) => (
+            { jsonData.subjectList.map((subject, index) => (
               <option key={ index }>{ subject }</option>
             )) }
 
@@ -45,7 +45,7 @@ export default ({ handleChange }) => {
             <Form.Select required isValid>
               <option hidden defaultValue>Choose an assessment</option>
 
-              { jsonData.assess.ass.map((assessment, index) => (
+              { jsonData.assessment.assessList.map((assessment, index) => (
                 <option key={ index }>{ assessment.name }</option>
               )) }
 
