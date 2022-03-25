@@ -39,6 +39,7 @@ textarea {
 
 .nextprevious {
   overflow: auto;
+  margin-top: 30px;
 }
 
 .btn-nextprevious {
@@ -119,10 +120,6 @@ button:focus {
   text-align: center;
   margin-top: 30px;
   margin-bottom: 30px;
-}
-
-.thanks-message {
-  display: none;
 }
 
 .welcome_note_container {

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import { Route, Switch, Redirect } from "react-router-dom"
-import { Routes } from "../routes"
+
+import { Route, Routes, Navigate, Outlet } from "react-router"
+import { Router } from "../router"
 
 // pages
 import Dashboard from "./Dashbaord"
@@ -23,16 +24,20 @@ import Navbar from "../components/Navbar"
 import Footer from "../components/Footer"
 import Preloader from "../components/Preloader"
 
+
 const RouteWithLoader = ({ component: Component, ...rest }) => {
   const [loaded, setLoaded] = useState(false)
 
   useEffect(() => {
-    const timer = setTimeout(() => setLoaded(true), 1000)
+    const timer = setTimeout(() => setLoaded(true), 100)
     return () => clearTimeout(timer)
   }, [])
 
   return (
-    <Route { ...rest } render={ props => (<> <Preloader show={ loaded ? false : true } /> <Component { ...props } /> </>) } />
+    <>
+      <Preloader show={ loaded ? false : true } />
+      <Outlet />
+    </>
   )
 }
 
@@ -56,43 +61,39 @@ const RouteWithSidebar = ({ component: Component, ...rest }) => {
   }
 
   return (
-    <Route { ...rest } render={ props => (
-      <>
-        <Preloader show={ loaded ? false : true } />
-        <Sidebar />
+    <>
+      <Preloader show={ loaded ? false : true } />
+      <Sidebar />
 
-        <main className="content">
-          <Navbar />
-          <Component { ...props } />
-          <Footer toggleSettings={ toggleSettings } showSettings={ showSettings } />
-        </main>
-      </>
-    ) }
-    />
+      <main className="content">
+        <Navbar />
+        <Outlet />
+        <Footer toggleSettings={ toggleSettings } showSettings={ showSettings } />
+      </main>
+    </>
   )
 }
 
 export default () => (
-  <Switch>
+  <Routes>
 
+    {/* pages */ }
+    <Route path='*' element={ <NotFoundPage /> } />
+    <Route path="/examples" element={ <RouteWithLoader /> } >
+      <Route path={ Router.Signin.path } element={ <Signin /> } />
+      <Route path={ Router.Signup.path } element={ <Signup /> } />
+      <Route path={ Router.ForgotPassword.path } element={ <ForgotPassword /> } />
+      <Route path={ Router.ResetPassword.path } element={ <ResetPassword /> } />
+      <Route path={ Router.Lock.path } element={ <Lock /> } />
+      <Route path={ Router.ServerError.path } element={ <ServerError /> } />
+    </Route>
 
-    {/* pages with sidebar */ }
-    <RouteWithSidebar exact path={ Routes.Home.path } component={ Dashboard } />
-    <RouteWithSidebar exact path={ Routes.Dashboard.path } component={ Dashboard } />  
-    <RouteWithSidebar exact path={ Routes.Generator.path } component={ Generator } />
-    <RouteWithSidebar exact path={ Routes.ResultList.path } component={ ResultList } />
-    <RouteWithSidebar exact path={ Routes.Result.path } component={ Result } />
-    <RouteWithSidebar exact path={ Routes.BootstrapTables.path } component={ BootstrapTables } />
-
-    {/* pages with loader */ }
-    <RouteWithLoader exact path={ Routes.Signin.path } component={ Signin } />
-    <RouteWithLoader exact path={ Routes.Signup.path } component={ Signup } />
-    <RouteWithLoader exact path={ Routes.ForgotPassword.path } component={ ForgotPassword } />
-    <RouteWithLoader exact path={ Routes.ResetPassword.path } component={ ResetPassword } />
-    <RouteWithLoader exact path={ Routes.Lock.path } component={ Lock } />
-    <RouteWithLoader exact path={ Routes.NotFound.path } component={ NotFoundPage } />
-    <RouteWithLoader exact path={ Routes.ServerError.path } component={ ServerError } />
-
-    <Redirect to={ Routes.NotFound.path } />
-  </Switch>
+    <Route path="/" element={ <RouteWithSidebar /> } >
+      <Route path={ Router.Dashboard.path } element={ <Dashboard /> } />
+      <Route path={ Router.Generator.path } element={ <Generator /> } />
+      <Route path={ Router.ResultList.path } element={ <ResultList /> } />
+      <Route path={ Router.Result.path } element={ <Result /> } />
+      <Route path={ Router.BootstrapTables.path } element={ <BootstrapTables /> } />
+    </Route>
+  </Routes >
 )

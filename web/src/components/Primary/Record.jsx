@@ -5,31 +5,15 @@ import { CounterWidget } from "../Widgets";
 import jsonData from '../../data/schema/primary.json'
 
 
-export default ({ handleChange }) => {
-  const [qualification, setQualification] = useState({})
-  const [data, setData] = useState({})
-  let temp = { route: 'qualification' }
+export default ({ title }) => {
 
-  useEffect(() => {
-    setQualification(prev => ({ ...prev, ...{ qualification: data } }))
-  }, [data])
-
-  useEffect(() => {
-    //console.log(bio)
-    handleChange(qualification)
-  }, [qualification])
-
-  const onChange = (e) => {
-    temp[e.target.name] = e.target.value
-    setData((d) => ({ ...d, ...temp }))
-  }
   return (
     <>
       <div className="container">
-        <h4 id="register">Student Records</h4>
+        <h4 id="register">{ title }</h4>
         <Form.Group as={ Col } controlId="formGridClass" className="mb-3">
           <Form.Label>Subject</Form.Label>
-          <Form.Select required isValid>
+          <Form.Select required isInvalid>
             <option hidden defaultValue>Choose an subject</option>
 
             { jsonData.subjectList.map((subject, index) => (
@@ -38,11 +22,12 @@ export default ({ handleChange }) => {
 
           </Form.Select>
           <Form.Control.Feedback type="valid">Looks good!</Form.Control.Feedback>
+          <Form.Control.Feedback type="invalid">Enter subject</Form.Control.Feedback>
         </Form.Group>
         <Row className=" mb-3">
           <Form.Group as={ Col } controlId="formGridClass" className="mb-3">
             <Form.Label>Assessment</Form.Label>
-            <Form.Select required isValid>
+            <Form.Select required isInvalid>
               <option hidden defaultValue>Choose an assessment</option>
 
               { jsonData.assessment.assessList.map((assessment, index) => (
@@ -51,16 +36,17 @@ export default ({ handleChange }) => {
 
             </Form.Select>
             <Form.Control.Feedback type="valid">Looks good!</Form.Control.Feedback>
+            <Form.Control.Feedback type="invalid">Enter an Assessment</Form.Control.Feedback>
           </Form.Group>
           <Form.Group as={ Col } controlId="formGridEmail">
             <Form.Label>Score</Form.Label>
-            <Form.Control required isInvalid type="number" defaultValue="1234" />
+            <Form.Control required isInvalid type="number"/>
             <Form.Control.Feedback type="invalid">Please choose a username.</Form.Control.Feedback>
           </Form.Group>
         </Row>
 
         <Row className="justify-content-between flex-wrap flex-md-nowrap align-items-center py-4">
-          <Col xs={ 12 } sm={ 6 } xl={ 4 } className="mb-4">
+          <Col  className="mb-4">
             <CounterWidget
               category="Customers"
               title="345k"
@@ -71,7 +57,7 @@ export default ({ handleChange }) => {
             />
           </Col>
 
-          <Col xs={ 12 } sm={ 6 } xl={ 4 } className="mb-4">
+          <Col  className="mb-4">
             <CounterWidget
               category="Revenue"
               title="$43,594"

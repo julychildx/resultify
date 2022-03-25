@@ -1,18 +1,17 @@
 
-export const Routes = {
+export const Router = {
     // pages
-    Home: { path: "/" },
-    Generator: { path: "/examples/generator" },
-    Dashboard: { path: "/dashboard" },
+    Dashboard: { path: "/" },
+    Generator: { path: "/generator" },
     ResultList: { path: "/results" },
     Result: { path: "/result" },
     BootstrapTables: { path: "/tables/bootstrap-tables" },
-    
-    Signin: { path: "/sign-in" },
+
+    Signin: { path: "/examples/sign-in" },
     Signup: { path: "/examples/sign-up" },
     ForgotPassword: { path: "/examples/forgot-password" },
     ResetPassword: { path: "/examples/reset-password" },
     Lock: { path: "/examples/lock" },
     NotFound: { path: "/examples/404" },
     ServerError: { path: "/examples/500" },
-};
+}

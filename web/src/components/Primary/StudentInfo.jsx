@@ -8,24 +8,7 @@ import { faCalendarAlt } from "@fortawesome/free-solid-svg-icons"
 import jsonData from '../../data/schema/primary.json'
 import school from '../../data/schema/school.json'
 
-export default ({ handleChange }) => {
-    const [bio, setBio] = useState({})
-    const [data, setData] = useState({})
-    let temp = { route: 'bio' }
-
-    useEffect(() => {
-        setBio(prev => ({ ...prev, ...{ bio: data } }))
-    }, [data])
-
-    useEffect(() => {
-        //console.log(bio)
-        handleChange(bio)
-    }, [bio])
-
-    const onChange = (e) => {
-        temp[e.target.name] = e.target.value
-        setData((d) => ({ ...d, ...temp }))
-    }
+export default ({ handleFormData, title }) => {
 
     const Datepicker = () => {
         const [birthday, setBirthday] = React.useState("")
@@ -41,14 +24,17 @@ export default ({ handleChange }) => {
                         <InputGroup>
                             <InputGroup.Text><FontAwesomeIcon icon={ faCalendarAlt } /></InputGroup.Text>
                             <Form.Control
-                                required
+                                required isInvalid
                                 type="text"
                                 value={ birthday ? moment(birthday).format("MM/DD/YYYY") : "" }
                                 placeholder="mm/dd/yyyy"
                                 onFocus={ openCalendar }
-                                onChange={ () => { } } />
+                                onChange={ (e) => handleFormData(e.target)  } />
+                            <Form.Control.Feedback type="valid">Looks good!</Form.Control.Feedback>
+                            <Form.Control.Feedback type="invalid">Enter resumption date!</Form.Control.Feedback>
                         </InputGroup>
                     ) } />
+
             </Form.Group>
         )
     }
@@ -56,24 +42,32 @@ export default ({ handleChange }) => {
     return (
         <>
             <div className="container">
-                <h4 id="register">Student Information</h4>
+                <h4 id="register">{ title }</h4>
                 <Row className="mb-3">
                     <Form.Group as={ Col } controlId="formGridEmail">
                         <Form.Label>First Name</Form.Label>
-                        <Form.Control required isInvalid type="text" placeholder="Enter first name" />
+                        <Form.Control
+                            name="first_name"
+                            required isInvalid type="text"
+                            placeholder="Enter first name"
+                            onChange={ (e) => handleFormData(e.target)  }
+                        />
+                        <Form.Control.Feedback type="valid">Looks good!</Form.Control.Feedback>
                         <Form.Control.Feedback type="invalid">Please choose a username.</Form.Control.Feedback>
                     </Form.Group>
 
                     <Form.Group as={ Col } controlId="formGridPassword">
                         <Form.Label>Last Name</Form.Label>
-                        <Form.Control required isValid type="text" placeholder="Enter last name" defaultValue="John" />
+                        <Form.Control onChange={ (e) => handleFormData(e.target) } name="last_name" required isInvalid type="text" placeholder="Enter last name" />
                         <Form.Control.Feedback type="valid">Looks good!</Form.Control.Feedback>
+                        <Form.Control.Feedback type="invalid">Please choose a username.</Form.Control.Feedback>
                     </Form.Group>
 
                     <Form.Group as={ Col } controlId="formGridPassword">
                         <Form.Label>Other Name</Form.Label>
-                        <Form.Control required isValid type="text" placeholder="Enter last name" defaultValue="John" />
+                        <Form.Control onChange={ (e) =>  handleFormData(e.target)  } name="other_name" type="text" placeholder="Enter last name" />
                         <Form.Control.Feedback type="valid">Looks good!</Form.Control.Feedback>
+                        <Form.Control.Feedback type="invalid">Please choose a username.</Form.Control.Feedback>
                     </Form.Group>
                 </Row>
                 <Row>
@@ -101,23 +95,25 @@ export default ({ handleChange }) => {
                         </fieldset>
                     </Form.Group>
                 </Row>
-                <Row>
+                {/* <Row>
                     <Form.Group controlId="formGridEmail">
                         <Form.Label>Uplaod Student Picture</Form.Label>
-                        <Form.Control required isValid type="file" />
+                        <Form.Control required isInvalid type="file" />
+                        <Form.Control.Feedback type="valid">Please choose a username.</Form.Control.Feedback>
                         <Form.Control.Feedback type="invalid">Please choose a username.</Form.Control.Feedback>
                     </Form.Group>
-                </Row>
+                </Row> */}
 
                 <Row className="mb-3">
                     <Form.Group as={ Col } controlId="formGridEmail">
                         <Form.Label>Admision Number</Form.Label>
-                        <Form.Control required isInvalid type="number" defaultValue="1234" />
+                        <Form.Control onChange={ handleFormData } name="admision_number" required isInvalid type="number" />
+                        <Form.Control.Feedback type="valid">Please choose a username.</Form.Control.Feedback>
                         <Form.Control.Feedback type="invalid">Please choose a username.</Form.Control.Feedback>
                     </Form.Group>
                     <Form.Group as={ Col } controlId="formGridClass" className="mb-3">
                         <Form.Label>Class</Form.Label>
-                        <Form.Select required isValid>
+                        <Form.Select name="class" required isInvalid >
                             <option defaultValue>Choose a class</option>
                             { school.classList.map(({ arm, name, section }, index) => {
                                 if (arm === 'primary')
@@ -125,26 +121,30 @@ export default ({ handleChange }) => {
                             }) }
                         </Form.Select>
                         <Form.Control.Feedback type="valid">Looks good!</Form.Control.Feedback>
+                        <Form.Control.Feedback type="invalid">Please choose a username.</Form.Control.Feedback>
                     </Form.Group>
                 </Row>
 
                 <Row className="mb-3">
                     <Form.Group as={ Col } controlId="formGridOpend">
                         <Form.Label>Days Opened</Form.Label>
-                        <Form.Control required isInvalid type="text" placeholder="Enter first name" />
+                        <Form.Control onChange={ (e) => { handleFormData(e) } } name="opened" required isInvalid type="number" placeholder="Enter first name" />
+                        <Form.Control.Feedback type="valid">Please choose a username.</Form.Control.Feedback>
                         <Form.Control.Feedback type="invalid">Please choose a username.</Form.Control.Feedback>
                     </Form.Group>
 
                     <Form.Group as={ Col } controlId="formGridPassword">
                         <Form.Label>Days Present</Form.Label>
-                        <Form.Control required isValid type="text" placeholder="Enter last name" defaultValue="John" />
+                        <Form.Control onChange={ handleFormData } name="present" required isInvalid type="number" placeholder="Enter last name" />
                         <Form.Control.Feedback type="valid">Looks good!</Form.Control.Feedback>
+                        <Form.Control.Feedback type="invalid">Please choose a username.</Form.Control.Feedback>
                     </Form.Group>
 
                     <Form.Group as={ Col } controlId="formGridPassword">
                         <Form.Label>Days Absent</Form.Label>
-                        <Form.Control required isValid type="text" placeholder="Enter last name" defaultValue="John" />
+                        <Form.Control onChange={ (e) => { handleFormData(e) } } name="absent" required isInvalid type="number" placeholder="Enter last name" defaultValue="John" />
                         <Form.Control.Feedback type="valid">Looks good!</Form.Control.Feedback>
+                        <Form.Control.Feedback type="invalid">Please choose a username.</Form.Control.Feedback>
                     </Form.Group>
                 </Row>
 

@@ -3,7 +3,7 @@ import en from 'javascript-time-ago/locale/en.json'
 TimeAgo.addDefaultLocale(en)
 
 export const api = "https://anjali1196.pythonanywhere.com"
-export const apiV1 = "http://localhost:33000"
+export const apiV1 = "http://localhost:8000"
 
 export const website = "https://localhost:3000"
 

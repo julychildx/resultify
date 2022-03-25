@@ -6,40 +6,19 @@ import moment from "moment-timezone"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faCalendarAlt } from "@fortawesome/free-solid-svg-icons"
 
-export default({ handleChange}) => {
-    const [health, setHealth] = useState({})
-    const [data, setData] = useState({})
-    let temp = { route: 'health'}
+export default ({ title }) => {
 
-    useEffect(() => {
-        setHealth(prev => ({ ...prev, ...{ health: data } }))
-    }, [data])
-
-    useEffect(() => {
-        //console.log(bio)
-        handleChange(health)
-    }, [health])
-
-    const onChange = (e) => {
-        temp[e.target.name] = e.target.value
-        setData((d) => ({ ...d, ...temp }))
-    }
-  return (
-      <>
-          <div className="container">
-              <h4 id="register">Remarks</h4>
-              <Form.Group as={ Col } controlId="formGridPassword">
-                  <Form.Label>Last Name</Form.Label>
-                  <Form.Control required isValid type="text" placeholder="Enter last name" defaultValue="John" />
-                  <Form.Control.Feedback type="valid">Looks good!</Form.Control.Feedback>
-              </Form.Group>
-
-              <Form.Group as={ Col } controlId="formGridPassword">
-                  <Form.Label>Other Name</Form.Label>
-                  <Form.Control required isValid type="text" placeholder="Enter last name" defaultValue="John" />
-                  <Form.Control.Feedback type="valid">Looks good!</Form.Control.Feedback>
-              </Form.Group>
-          </div>
-      </>
-  )
+    return (
+        <>
+            <div className="container">
+                <h4 id="register">{ title }</h4>
+                <Form.Group>
+                    <Form.Label>Teacher's Comment</Form.Label>
+                    <Form.Control required isInvalid as="textarea" rows="4" placeholder="Enter your message..." />
+                    <Form.Control.Feedback type="valid">Looks good!</Form.Control.Feedback>
+                    <Form.Control.Feedback type="invalid">Please enter comment for this student!</Form.Control.Feedback>
+                </Form.Group>
+            </div>
+        </>
+    )
 }
